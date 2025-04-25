@@ -1,332 +1,154 @@
-<!-- <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script type="text/javascript" src="data.json"></script>
-    <body>
-      <style>
-        body {
-          /* background-image: url("rent.jpg"); */
-
-          background-size: 400px 500px;
-          opacity: 0.9;
-          background-position: left;
-          background-repeat: no-repeat;
-          justify-content: center;
-          font-family: "Dosis", sans-serif;
-          border-radius: 15px;
-        }
-        @import url("https://fonts.googleapis.com/css?family=Dosis");
-
-        .container {
-          z-index: 1;
-          background-color: whitesmoke;
-          display: inline-block;
-          border-radius: 20px;
-          margin-left: 35vw;
-          margin-top: 1vh;
-          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-            0 6px 20px 0 rgba(0, 0, 0, 0.3);
-          height: 80vh;
-          width: 30vw;
-        }
-        .container input {
-          width: 20vw;
-          position: relative;
-          height: 9vh;
-          border-radius: 15px;
-          box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2),
-            0 6px 20px 0 rgba(0, 0, 0, 0.3);
-          border: none;
-          outline: none;
-          padding: 20px;
-          display: block;
-          margin: 7vh 0vw 0vw 5vw;
-          text-align: center;
-        }
-
-        .container #clickButton {
-          background: linear-gradient(to right, #6666ff 0%, #ff00ff 100%);
-          border-radius: 25px;
-          color: whitesmoke;
-          font-size: 1em;
-          cursor: pointer;
-        }
-      </style>
-    </body>
-
-    <div class="container">
-      <h1
-        style="
-          color: Fuchsia;
-          font-size: 2em;
-          text-align: center;
-          padding: 10px;
-          margin: 4vh 0 0 0;
-        "
-      >
-        Login
-      </h1>
-
-      <form id="form1" method="post" action="" onsubmit="return check_form();">
-        <input
-          type="text"
-          name="username"
-          id="name"
-          placeholder="Username..."
-          autocomplete="off"
-        />
-
-        <input
-          type="password"
-          name="psw"
-          id="pass"
-          placeholder="Password...."
-        />
-
-        <input type="submit" value="Submit" id="clickButton" />
-      </form>
-      <script>
-        var login_attempts = 3;
-        function check_form() {
-          //   $.ajax({
-          //     url: "untitled18.py",
-          //     success: function (response) {
-          //       // here you do whatever you want with the response variable
-          //     },
-          //   });
-          //console.log("frgreg");
-          var name = document.getElementById("name").value;
-          var pass = document.getElementById("pass").value;
-          var dataks = JSON.stringify(data);
-          var myobj1 = JSON.parse(dataks);
-          console.log(dataks);
-          var username2 = myobj1.username1;
-          var password2 = myobj1.password1;
-          console.log(username2);
-          console.log(password2);
-          //console.log(username1);
-          /*var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var dataks = JSON.parse(this.responseText);
-      console.log("jhdsjfh")
-   // document.getElementById("demo").innerHTML = myObj.name;
-      
-  }
-};
-xmlhttp.open("GET", "data.json", true);
-xmlhttp.send();
-    
-    var username3=dataks.username1;
-    var password3=dataks.password1;
-    //console.log(username3);*/
-          if (name == username2 && pass == password2) {
-            console.log(name);
-            //console.log(username1);
-            alert("SuccessFully Logged In");
-            window.open("https://www.kmit.in/");
-            document.getElementById("name").value = "";
-            document.getElementById("pass").value = "";
-          } else {
-            if (login_attempts == 0) {
-              alert("No Login Attempts Available");
-              setInterval(function () {
-                document.getElementById("clickButton").click();
-              }, 5000);
-            } else {
-              login_attempts = login_attempts - 1;
-              alert(
-                "Login Failed Now Only " +
-                  login_attempts +
-                  " Login Attempts Available"
-              );
-              if (login_attempts == 0) {
-                $.ajax({
-                  url: "CaptureImage.py",
-                  success: function (response) {
-                    // here you do whatever you want with the response variable
-                  },
-                });
-                document.getElementById("name").disabled = true;
-                document.getElementById("pass").disabled = true;
-                document.getElementById("form1").disabled = true;
-                //       setInterval(function() {
-                //            document.getElementById("clickButton").click();
-                //        }, 5000);
-                //
-              }
-            }
-          }
-
-          return false;
-        }
-      </script>
-    </div>
-  </head>
-</html> -->
-
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <script type="text/javascript" src="data.json"></script>
-    <style>
-      body {
-        background-size: 400px 500px;
-        opacity: 0.9;
-        background-position: left;
-        background-repeat: no-repeat;
-        justify-content: center;
-        font-family: "Dosis", sans-serif;
-        border-radius: 15px;
-      }
-      @import url("https://fonts.googleapis.com/css?family=Dosis");
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript" src="data.json"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Inter", sans-serif;
+    }
+    .container {
+      z-index: 1;
+      background-color: white; /* Tailwind's bg-white */
+      display: inline-block;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+      height: 80vh;
+      width: 30vw;
+    }
+    .container input {
+      width: 20vw;
+      position: relative;
+      height: 9vh;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+      border: none;
+      outline: none;
+      padding: 20px;
+      display: block;
+      margin: 7vh 0vw 0vw 5vw;
+      text-align: center;
+    }
+    .container #clickButton {
+      background-color: #f59e0b; /* Tailwind's bg-yellow-500 */
+      border-radius: 25px;
+      color: #1e3a8a; /* Tailwind's text-blue-900 */
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .container #clickButton:hover {
+      background-color: #fbbf24; /* Tailwind's bg-yellow-400 */
+    }
+    .password-container {
+      position: relative;
+      width: 20vw;
+      margin: 7vh 0vw 0vw 5vw;
+    }
+    .password-container input {
+      width: 100%;
+      margin: 0;
+    }
+    .password-container i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #1e3a8a; /* Tailwind's text-blue-900 */
+      font-size: 1.2em;
+    }
+    .success-message {
+      display: none;
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 style="color: #1e3a8a; font-size: 2em; text-align: center; padding: 10px; margin: 4vh 0 0 0;">Login</h1>
+  <form id="form1" method="post" action="/login" onsubmit="return check_form(event);">
+    <input type="text" name="username" id="name" placeholder="Username..." autocomplete="off" />
+    <div class="password-container">
+      <input type="password" name="psw" id="pass" placeholder="Password...." />
+      <i class="fas fa-eye" id="togglePassword"></i>
+    </div>
+    <input type="submit" value="Submit" id="clickButton" />
+    <div id="successMessage" class="success-message"></div>
+  </form>
+  <script>
+    let login_attempts = 3;
 
-      .container {
-        z-index: 1;
-        background-color: whitesmoke;
-        display: inline-block;
-        border-radius: 20px;
-        margin-left: 35vw;
-        margin-top: 1vh;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-          0 6px 20px 0 rgba(0, 0, 0, 0.3);
-        height: 80vh;
-        width: 30vw;
-      }
-      .container input {
-        width: 20vw;
-        position: relative;
-        height: 9vh;
-        border-radius: 15px;
-        box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2),
-          0 6px 20px 0 rgba(0, 0, 0, 0.3);
-        border: none;
-        outline: none;
-        padding: 20px;
-        display: block;
-        margin: 7vh 0vw 0vw 5vw;
-        text-align: center;
-      }
+    function runIntruderCapture() {
+      fetch('/run-capture-image', { method: 'POST' })
+        .then(response => response.json())
+        .then(result => console.log("CaptureImage result:", result))
+        .catch(error => console.error("CaptureImage error:", error));
+      fetch('/run-keylogger', { method: 'POST' })
+        .then(response => response.json())
+        .then(result => console.log("Keylogger result:", result))
+        .catch(error => console.error("Keylogger error:", error));
+    }
 
-      .container #clickButton {
-        background: linear-gradient(to right, #6666ff 0%, #ff00ff 100%);
-        border-radius: 25px;
-        color: whitesmoke;
-        font-size: 1em;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1
-        style="
-          color: Fuchsia;
-          font-size: 2em;
-          text-align: center;
-          padding: 10px;
-          margin: 4vh 0 0 0;
-        "
-      >
-        Login
-      </h1>
+    // Toggle password visibility
+    document.getElementById("togglePassword").addEventListener("click", function () {
+      const password = document.getElementById("pass");
+      const type = password.getAttribute("type") === "password" ? "text" : "password";
+      password.setAttribute("type", type);
+      this.classList.toggle("fa-eye-slash");
+    });
 
-      <form
-        id="form1"
-        method="post"
-        action="/login"
-        onsubmit="return check_form();"
-      >
-        <input
-          type="text"
-          name="username"
-          id="name"
-          placeholder="Username..."
-          autocomplete="off"
-        />
+    function check_form(event) {
+      event.preventDefault();
+      let name = document.getElementById("name").value;
+      let pass = document.getElementById("pass").value;
+      let dataks = JSON.stringify(data);
+      let myobj1 = JSON.parse(dataks);
+      let username2 = myobj1.username1;
+      let password2 = myobj1.password1;
 
-        <input
-          type="password"
-          name="psw"
-          id="pass"
-          placeholder="Password...."
-        />
-
-        <input type="submit" value="Submit" id="clickButton" />
-      </form>
-
-      <script>
-        var login_attempts = 3;
-
-        function runPythonScripts() {
-          fetch("/run-capture-image", { method: "POST" })
-            .then((response) => response.json())
-            .then((result) => {
-              console.log("CaptureImage.py executed:", result);
-            })
-            .catch((error) => {
-              console.error("Error running CaptureImage.py:", error);
-            });
-
-          fetch("/run-keylogger", { method: "POST" })
-            .then((response) => response.json())
-            .then((result) => {
-              console.log("keylogger.py executed:", result);
-            })
-            .catch((error) => {
-              console.error("Error running keylogger.py:", error);
-            });
-        }
-
-        function check_form() {
-          var name = document.getElementById("name").value;
-          var pass = document.getElementById("pass").value;
-          var dataks = JSON.stringify(data);
-          var myobj1 = JSON.parse(dataks);
-
-          var username2 = myobj1.username1;
-          var password2 = myobj1.password1;
-
-          if (name == username2 && pass == password2) {
-            // Open the website in a new tab
-            window.open("https://www.kmit.in/", "_blank");
-
-            // Optional: clear the form
-            document.getElementById("name").value = "";
-            document.getElementById("pass").value = "";
-
-            // Return true to allow form submission
-            return true;
-          } else {
-            if (login_attempts == 0) {
-              alert("No Login Attempts Available");
-              runPythonScripts();
-              setInterval(function () {
-                document.getElementById("clickButton").click();
-              }, 5000);
-            } else {
-              login_attempts = login_attempts - 1;
-              alert(
-                "Login Failed Now Only " +
-                  login_attempts +
-                  " Login Attempts Available"
-              );
-              if (login_attempts == 0) {
-                runPythonScripts();
-                document.getElementById("name").disabled = true;
-                document.getElementById("pass").disabled = true;
-                document.getElementById("form1").disabled = true;
-              }
-            }
-            // Return false to prevent form submission
-            return false;
+      if (name === username2 && pass === password2) {
+        const successMessage = document.getElementById("successMessage");
+        successMessage.style.display = "block";
+        successMessage.textContent = "Login Successful";
+        setTimeout(() => {
+          window.open("/kmit", "_blank");
+          document.getElementById("name").value = "";
+          document.getElementById("pass").value = "";
+          successMessage.style.display = "none";
+        }, 2000);
+        return true;
+      } else {
+        if (login_attempts === 0) {
+          alert("No Login Attempts Available");
+          runIntruderCapture();
+          document.getElementById("name").disabled = true;
+          document.getElementById("pass").disabled = true;
+          document.getElementById("form1").disabled = true;
+        } else {
+          login_attempts--;
+          alert("Login Failed. " + login_attempts + " attempts remaining.");
+          if (login_attempts === 0) {
+            runIntruderCapture();
+            document.getElementById("name").disabled = true;
+            document.getElementById("pass").disabled = true;
+            document.getElementById("form1").disabled = true;
           }
         }
-      </script>
-    </div>
-  </body>
+        return false;
+      }
+    }
+  </script>
+</div>
+</body>
 </html>

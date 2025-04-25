@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMIT - Examination Results Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e293b; /* Tailwind's bg-gray-800 */
+        }
+        .restricted-header {
+            background-color: #1e40af; /* Tailwind's bg-blue-900 */
+        }
+        .table-container {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="text-white">
+<!-- Header Section -->
+<header class="restricted-header py-4">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-3xl font-bold">KMIT Examination Results Portal</h1>
+        <p class="text-sm">Restricted Access - College Head Only</p>
+    </div>
+</header>
+
+<!-- Results Section -->
+<section class="py-10">
+    <div class="container mx-auto px-4">
+        <div class="mb-6 text-center">
+            <label for="yearFilter" class="mr-2">Filter by Year:</label>
+            <select id="yearFilter" class="p-2 rounded-lg bg-white text-gray-800">
+                <option value="all">All Years</option>
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+            </select>
+        </div>
+        <div class="table-container">
+            <table class="w-full bg-white text-gray-800 rounded-lg shadow-lg">
+                <thead>
+                <tr class="bg-blue-900 text-white">
+                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">Roll Number</th>
+                    <th class="py-2 px-4 border-b cursor-pointer" onclick="sortTable(2)">GPA <span class="text-xs">(Click to Sort)</span></th>
+                    <th class="py-2 px-4 border-b">Year</th>
+                </tr>
+                </thead>
+                <tbody id="resultsTable">
+                <!-- 1st Year Students -->
+                <tr><td class="py-2 px-4 border-b">Anjali Sharma</td><td class="py-2 px-4 border-b">KMIT2021001</td><td class="py-2 px-4 border-b">8.9</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Ravi Kumar</td><td class="py-2 px-4 border-b">KMIT2021002</td><td class="py-2 px-4 border-b">7.5</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Sneha Reddy</td><td class="py-2 px-4 border-b">KMIT2021003</td><td class="py-2 px-4 border-b">9.1</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Arjun Patel</td><td class="py-2 px-4 border-b">KMIT2021004</td><td class="py-2 px-4 border-b">6.9</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Meera Gupta</td><td class="py-2 px-4 border-b">KMIT2021005</td><td class="py-2 px-4 border-b">8.2</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Vikram Rao</td><td class="py-2 px-4 border-b">KMIT2021006</td><td class="py-2 px-4 border-b">7.8</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Kavya Nair</td><td class="py-2 px-4 border-b">KMIT2021007</td><td class="py-2 px-4 border-b">9.4</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Rohan Singh</td><td class="py-2 px-4 border-b">KMIT2021008</td><td class="py-2 px-4 border-b">6.5</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Divya Joshi</td><td class="py-2 px-4 border-b">KMIT2021009</td><td class="py-2 px-4 border-b">8.7</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Nikhil Yadav</td><td class="py-2 px-4 border-b">KMIT2021010</td><td class="py-2 px-4 border-b">7.3</td><td class="py-2 px-4 border-b">1st Year</td></tr>
+                <!-- 2nd Year Students -->
+                <tr><td class="py-2 px-4 border-b">Priya Reddy</td><td class="py-2 px-4 border-b">KMIT2020001</td><td class="py-2 px-4 border-b">9.2</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Suresh Patel</td><td class="py-2 px-4 border-b">KMIT2020002</td><td class="py-2 px-4 border-b">6.8</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Lakshmi Nair</td><td class="py-2 px-4 border-b">KMIT2020003</td><td class="py-2 px-4 border-b">8.4</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Aditya Sharma</td><td class="py-2 px-4 border-b">KMIT2020004</td><td class="py-2 px-4 border-b">7.9</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Pooja Gupta</td><td class="py-2 px-4 border-b">KMIT2020005</td><td class="py-2 px-4 border-b">9.0</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Karan Singh</td><td class="py-2 px-4 border-b">KMIT2020006</td><td class="py-2 px-4 border-b">6.6</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Ananya Rao</td><td class="py-2 px-4 border-b">KMIT2020007</td><td class="py-2 px-4 border-b">8.8</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Vivek Yadav</td><td class="py-2 px-4 border-b">KMIT2020008</td><td class="py-2 px-4 border-b">7.4</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Shreya Joshi</td><td class="py-2 px-4 border-b">KMIT2020009</td><td class="py-2 px-4 border-b">9.3</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Rahul Kumar</td><td class="py-2 px-4 border-b">KMIT2020010</td><td class="py-2 px-4 border-b">7.7</td><td class="py-2 px-4 border-b">2nd Year</td></tr>
+                <!-- 3rd Year Students -->
+                <tr><td class="py-2 px-4 border-b">Neha Gupta</td><td class="py-2 px-4 border-b">KMIT2019001</td><td class="py-2 px-4 border-b">8.5</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Vikram Singh</td><td class="py-2 px-4 border-b">KMIT2019002</td><td class="py-2 px-4 border-b">7.9</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Sanya Reddy</td><td class="py-2 px-4 border-b">KMIT2019003</td><td class="py-2 px-4 border-b">9.1</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Rakesh Patel</td><td class="py-2 px-4 border-b">KMIT2019004</td><td class="py-2 px-4 border-b">6.7</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Tanya Nair</td><td class="py-2 px-4 border-b">KMIT2019005</td><td class="py-2 px-4 border-b">8.3</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Aryan Sharma</td><td class="py-2 px-4 border-b">KMIT2019006</td><td class="py-2 px-4 border-b">7.6</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Ishita Rao</td><td class="py-2 px-4 border-b">KMIT2019007</td><td class="py-2 px-4 border-b">9.4</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Naveen Kumar</td><td class="py-2 px-4 border-b">KMIT2019008</td><td class="py-2 px-4 border-b">7.0</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Riya Joshi</td><td class="py-2 px-4 border-b">KMIT2019009</td><td class="py-2 px-4 border-b">8.9</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Siddharth Yadav</td><td class="py-2 px-4 border-b">KMIT2019010</td><td class="py-2 px-4 border-b">7.8</td><td class="py-2 px-4 border-b">3rd Year</td></tr>
+                <!-- 4th Year Students -->
+                <tr><td class="py-2 px-4 border-b">Kiran Rao</td><td class="py-2 px-4 border-b">KMIT2018001</td><td class="py-2 px-4 border-b">9.5</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Amit Joshi</td><td class="py-2 px-4 border-b">KMIT2018002</td><td class="py-2 px-4 border-b">7.2</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Deepa Nair</td><td class="py-2 px-4 border-b">KMIT2018003</td><td class="py-2 px-4 border-b">8.6</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Rohit Sharma</td><td class="py-2 px-4 border-b">KMIT2018004</td><td class="py-2 px-4 border-b">7.4</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Swati Gupta</td><td class="py-2 px-4 border-b">KMIT2018005</td><td class="py-2 px-4 border-b">9.0</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Manish Singh</td><td class="py-2 px-4 border-b">KMIT2018006</td><td class="py-2 px-4 border-b">6.9</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Preeti Reddy</td><td class="py-2 px-4 border-b">KMIT2018007</td><td class="py-2 px-4 border-b">8.7</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Vinay Kumar</td><td class="py-2 px-4 border-b">KMIT2018008</td><td class="py-2 px-4 border-b">7.8</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Nisha Patel</td><td class="py-2 px-4 border-b">KMIT2018009</td><td class="py-2 px-4 border-b">9.2</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                <tr><td class="py-2 px-4 border-b">Akash Yadav</td><td class="py-2 px-4 border-b">KMIT2018010</td><td class="py-2 px-4 border-b">7.1</td><td class="py-2 px-4 border-b">4th Year</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-blue-900 py-4">
+    <div class="container mx-auto px-4 text-center">
+        <p>© 2025 KMIT Examination Portal. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    let sortDirection = 1; // 1 for ascending, -1 for descending
+
+    function sortTable(columnIndex) {
+        const table = document.getElementById("resultsTable");
+        const rows = Array.from(table.getElementsByTagName("tr"));
+        const selectedYear = document.getElementById("yearFilter").value;
+
+        let filteredRows = rows;
+        if (selectedYear !== "all") {
+            filteredRows = rows.filter(row => row.cells[3].textContent === selectedYear);
+        }
+
+        filteredRows.sort((a, b) => {
+            const aValue = parseFloat(a.cells[columnIndex].textContent);
+            const bValue = parseFloat(b.cells[columnIndex].textContent);
+            return sortDirection * (aValue - bValue);
+        });
+
+        // Toggle sort direction
+        sortDirection *= -1;
+
+        // Re-append sorted rows
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+        filteredRows.forEach(row => table.appendChild(row));
+    }
+
+    function filterByYear() {
+        const table = document.getElementById("resultsTable");
+        const rows = Array.from(table.getElementsByTagName("tr"));
+        const selectedYear = document.getElementById("yearFilter").value;
+
+        let filteredRows = rows;
+        if (selectedYear !== "all") {
+            filteredRows = rows.filter(row => row.cells[3].textContent === selectedYear);
+        }
+
+        // Re-append filtered rows without sorting
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+        filteredRows.forEach(row => table.appendChild(row));
+
+        // Reset sort direction for next sort
+        sortDirection = 1;
+    }
+
+    // Add event listener to dropdown
+    document.getElementById("yearFilter").addEventListener("change", filterByYear);
+</script>
+</body>
+</html>
