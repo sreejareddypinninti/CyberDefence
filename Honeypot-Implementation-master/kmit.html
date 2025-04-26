@@ -21,10 +21,11 @@
 </head>
 <body class="text-white">
 <!-- Header Section -->
-<header class="restricted-header py-4">
+<header class="restricted-header py-4 relative">
     <div class="container mx-auto px-4 text-center">
         <h1 class="text-3xl font-bold">KMIT Examination Results Portal</h1>
         <p class="text-sm">Restricted Access - College Head Only</p>
+        <button onclick="window.location.href='/'" class="absolute top-4 right-4 bg-yellow-500 text-blue-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-400 transition">Logout</button>
     </div>
 </header>
 
@@ -111,18 +112,24 @@
 
 <script>
     let sortDirection = 1; // 1 for ascending, -1 for descending
+    let originalRows = []; // Store original table rows
+
+    // Initialize originalRows on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const table = document.getElementById("resultsTable");
+        originalRows = Array.from(table.getElementsByTagName("tr"));
+    });
 
     function sortTable(columnIndex) {
         const table = document.getElementById("resultsTable");
-        const rows = Array.from(table.getElementsByTagName("tr"));
         const selectedYear = document.getElementById("yearFilter").value;
 
-        let filteredRows = rows;
+        let filteredRows = originalRows;
         if (selectedYear !== "all") {
-            filteredRows = rows.filter(row => row.cells[3].textContent === selectedYear);
+            filteredRows = originalRows.filter(row => row.cells[3].textContent === selectedYear);
         }
 
-        filteredRows.sort((a, b) => {
+        filteredRows = filteredRows.sort((a, b) => {
             const aValue = parseFloat(a.cells[columnIndex].textContent);
             const bValue = parseFloat(b.cells[columnIndex].textContent);
             return sortDirection * (aValue - bValue);
@@ -131,7 +138,7 @@
         // Toggle sort direction
         sortDirection *= -1;
 
-        // Re-append sorted rows
+        // Clear and re-append sorted rows
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
@@ -140,15 +147,14 @@
 
     function filterByYear() {
         const table = document.getElementById("resultsTable");
-        const rows = Array.from(table.getElementsByTagName("tr"));
         const selectedYear = document.getElementById("yearFilter").value;
 
-        let filteredRows = rows;
+        let filteredRows = originalRows;
         if (selectedYear !== "all") {
-            filteredRows = rows.filter(row => row.cells[3].textContent === selectedYear);
+            filteredRows = originalRows.filter(row => row.cells[3].textContent === selectedYear);
         }
 
-        // Re-append filtered rows without sorting
+        // Clear and re-append filtered rows
         while (table.firstChild) {
             table.removeChild(table.firstChild);
         }
