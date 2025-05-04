@@ -7,6 +7,8 @@ import atexit
 import signal
 import json
 from datetime import datetime
+from email_alert import send_intruder_alert
+
 
 app = Flask(__name__, static_folder='.', static_url_path='/')
 CORS(app)
@@ -64,6 +66,24 @@ def run_capture_image():
             shell=False
         )
         stdout, stderr = capture_image_process.communicate()
+
+        # Send email alert after image capture
+        image_path = os.path.join(BASE_DIR, 'data_stored', 'Intruder.jpg')
+        ip_log_path = os.path.join(BASE_DIR, 'data_stored', 'ip_log.txt')
+        ip_info = "No IP info"
+        if os.path.exists(ip_log_path):
+            with open(ip_log_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                if lines:
+                    ip_info = lines[-1].strip()
+        send_intruder_alert(
+            to_email="your_gmail@gmail.com",  # Change to your admin email
+            subject="Honeypot Alert: Intruder Detected",
+            body="An intruder was detected. See attached image and IP info.",
+            image_path=image_path,
+            ip_info=ip_info
+        )
+
         return jsonify({
             "status": "success",
             "output": stdout,
@@ -104,6 +124,7 @@ def log_ip():
     with open(log_path, 'a', encoding='utf-8') as f:
         f.write(f"{now} {json.dumps(data)}\n")
     return jsonify({"status": "logged"})
+
 
 if __name__ == '__main__':
     try:
