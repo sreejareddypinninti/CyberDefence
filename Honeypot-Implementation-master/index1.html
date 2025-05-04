@@ -1,91 +1,145 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-  <script type="text/javascript" src="data.json"></script>
+  <meta charset="UTF-8">
+  <title>Login | Honeypot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <!-- Font Awesome for eye icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      background-color: #f3f4f6; /* Tailwind's bg-gray-100 */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #6366f1 0%, #f59e42 100%);
+      min-height: 100vh;
       margin: 0;
-      font-family: "Inter", sans-serif;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .container {
-      z-index: 1;
-      background-color: white; /* Tailwind's bg-white */
-      display: inline-block;
-      border-radius: 20px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-      height: 80vh;
-      width: 30vw;
+    .login-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(60, 72, 88, 0.18);
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      max-width: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: box-shadow 0.2s;
     }
-    .container input {
-      width: 20vw;
-      position: relative;
-      height: 9vh;
-      border-radius: 15px;
-      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
-      border: none;
-      outline: none;
-      padding: 20px;
-      display: block;
-      margin: 7vh 0vw 0vw 5vw;
+    .login-card:hover {
+      box-shadow: 0 12px 40px rgba(60, 72, 88, 0.22);
+    }
+    .login-title {
+      color: #1e3a8a;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: 0.5px;
       text-align: center;
     }
-    .container #clickButton {
-      background-color: #f59e0b; /* Tailwind's bg-yellow-500 */
-      border-radius: 25px;
-      color: #1e3a8a; /* Tailwind's text-blue-900 */
-      font-size: 1em;
-      cursor: pointer;
+    .login-card form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
     }
-    .container #clickButton:hover {
-      background-color: #fbbf24; /* Tailwind's bg-yellow-400 */
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f3f4f6;
+      transition: border 0.2s;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .login-card input[type="text"]:focus,
+    .login-card input[type="password"]:focus {
+      border: 1.5px solid #6366f1;
+      background: #fff;
     }
     .password-container {
       position: relative;
-      width: 20vw;
-      margin: 7vh 0vw 0vw 5vw;
+      width: 100%;
+      display: flex;
+      align-items: center;
     }
     .password-container input {
-      width: 100%;
-      margin: 0;
+      margin-bottom: 0;
+      flex: 1;
     }
     .password-container i {
       position: absolute;
-      right: 20px;
+      right: 1rem;
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
-      color: #1e3a8a; /* Tailwind's text-blue-900 */
-      font-size: 1.2em;
+      color: #6366f1;
+      font-size: 1.1em;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      z-index: 2;
+    }
+    .password-container i:hover {
+      opacity: 1;
+    }
+    .login-card input[type="submit"] {
+      width: 100%;
+      background: linear-gradient(90deg, #6366f1 0%, #f59e42 100%);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      padding: 0.85rem 0;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .login-card input[type="submit"]:hover {
+      background: linear-gradient(90deg, #4f46e5 0%, #fbbf24 100%);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.13);
     }
     .success-message {
       display: none;
-      color: green;
+      color: #22c55e;
       text-align: center;
-      margin-top: 10px;
-      font-weight: bold;
+      margin-top: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 1.5rem 1rem;
+        max-width: 95vw;
+      }
+      .login-title {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-<div class="container">
-  <h1 style="color: #1e3a8a; font-size: 2em; text-align: center; padding: 10px; margin: 4vh 0 0 0;">Login</h1>
-  <form id="form1" method="post" action="/login" onsubmit="return check_form(event);">
-    <input type="text" name="username" id="name" placeholder="Username..." autocomplete="off" />
-    <div class="password-container">
-      <input type="password" name="psw" id="pass" placeholder="Password...." />
-      <i class="fas fa-eye" id="togglePassword"></i>
-    </div>
-    <input type="submit" value="Submit" id="clickButton" />
-    <div id="successMessage" class="success-message"></div>
-  </form>
+  <div class="login-card">
+    <div class="login-title">Login</div>
+    <form id="form1" method="post" action="/login" onsubmit="return check_form(event);">
+      <input type="text" name="username" id="name" placeholder="Username" autocomplete="off" required />
+      <div class="password-container">
+        <input type="password" name="psw" id="pass" placeholder="Password" required />
+        <i class="fas fa-eye" id="togglePassword"></i>
+      </div>
+      <input type="submit" value="Sign In" id="clickButton" />
+      <div id="successMessage" class="success-message"></div>
+    </form>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="data.json"></script>
   <script>
     let login_attempts = 3;
 
@@ -107,6 +161,19 @@
       password.setAttribute("type", type);
       this.classList.toggle("fa-eye-slash");
     });
+
+    function logIpInfo() {
+      // Replace with your actual ipinfo.io token
+      $.getJSON("https://ipinfo.io?token=885cb8c751fec2", function (data) {
+        // Only log to backend, do not show on page
+        $.ajax({
+          url: "/log-ip",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data)
+        });
+      });
+    }
 
     function check_form(event) {
       event.preventDefault();
@@ -135,6 +202,7 @@
           document.getElementById("name").disabled = true;
           document.getElementById("pass").disabled = true;
           document.getElementById("form1").disabled = true;
+          logIpInfo();
         } else {
           login_attempts--;
           alert("Login Failed. " + login_attempts + " attempts remaining.");
@@ -143,12 +211,12 @@
             document.getElementById("name").disabled = true;
             document.getElementById("pass").disabled = true;
             document.getElementById("form1").disabled = true;
+            logIpInfo();
           }
         }
         return false;
       }
     }
   </script>
-</div>
 </body>
 </html>

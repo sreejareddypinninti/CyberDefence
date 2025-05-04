@@ -1,43 +1,73 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8" />
-
-    <title></title>
-
+    <title>Client IP Information</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            color: #1e293b;
+            margin: 0;
+            padding: 2rem;
+        }
+        .ip-info-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(60, 72, 88, 0.10);
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem 2.5rem;
+        }
+        .ip-info-card h2 {
+            margin-top: 0;
+            color: #2563eb;
+            text-align: center;
+        }
+        .ip-info-card p {
+            margin: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+    </style>
+   <script>
+    $(function () {
+        $.getJSON("https://ipinfo.io?token=" + IPINFO_TOKEN, function (data) {
+            $("#info").html("City: " + data.city);
+            $("#info1").html("Country: " + data.country);
+            $("#info2").html("IP: " + data.ip);
+            $("#info3").html("Location: " + data.loc);
+            $("#info4").html("Organisation: " + data.org);
+            $("#info5").html("Postal Code: " + data.postal);
+            $("#info6").html("Region: " + data.region);
 
-    <script>
-
-        var ipinfo;
-
-        $.getJSON("http://ipinfo.io", function (data) {
-
-            $("#info").html("City: " + data.city + " ,County: " + data.country + " ,IP: " + data.ip + " ,Location: " + data.loc + " ,Organisation: " + data.org + " ,Postal Code: " + data.postal + " ,Region: " + data.region + "")
-            $("#info").html("City: " + data.city)
-            $("#info1").html("Country: " + data.country)
-            $("#info2").html("Ip: " + data.ip)
-            $("#info3").html("Location: " + data.loc)
-            $("#info4").html("Organisation: " + data.org)
-            $("#inf5o").html("Postal Code: " + data.postal)
-            $("#info6").html("Region: " + data.region)
-        })
-
-    </script>
+            // Send IP info to backend for logging
+            $.ajax({
+                url: "/log-ip",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    console.log("IP logged:", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Failed to log IP:", error);
+                }
+            });
+        });
+    });
+</script>
 </head>
-
 <body>
-    <p>Client's information:</p>
-
-    <p id="info"></p>
-    <p id="info1"></p>
-    <p id="info2"></p>
-    <p id="info3"></p>
-    <p id="info4"></p>
-    <p id="info5"></p>
-    <p id="info6"></p>
-
+    <div class="ip-info-card">
+        <h2>Client's Information</h2>
+        <p id="info"></p>
+        <p id="info1"></p>
+        <p id="info2"></p>
+        <p id="info3"></p>
+        <p id="info4"></p>
+        <p id="info5"></p>
+        <p id="info6"></p>
+    </div>
 </body>
-
 </html>

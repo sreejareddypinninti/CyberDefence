@@ -5,11 +5,13 @@ import os
 import sys
 import atexit
 import signal
+import json
+from datetime import datetime
 
 app = Flask(__name__, static_folder='.', static_url_path='/')
 CORS(app)
 
-BASE_DIR = r"C:\Users\koosuru_vardhini\tasks\honeypot\Honeypot-Implementation-master"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 keylogger_process = None
 capture_image_process = None
 
@@ -88,6 +90,20 @@ def run_keylogger():
         })
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+@app.route('/log-ip', methods=['POST'])
+def log_ip():
+    data = request.get_json()
+    print("Received IP data:", data)  # Debug print
+    if not data:
+        return jsonify({"status": "error", "message": "No data received"}), 400
+    log_dir = os.path.join(os.path.dirname(__file__), "data_stored")
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, "ip_log.txt")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_path, 'a', encoding='utf-8') as f:
+        f.write(f"{now} {json.dumps(data)}\n")
+    return jsonify({"status": "logged"})
 
 if __name__ == '__main__':
     try:
