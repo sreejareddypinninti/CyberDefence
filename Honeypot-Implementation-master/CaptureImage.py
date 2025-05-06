@@ -1,8 +1,13 @@
 import cv2
 import os
 
-# Store in a project-relative directory
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data_stored")
+LOG_FILE = os.path.join(DATA_DIR, "capture_image.log")
+
+def log_error(msg):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(LOG_FILE, "a") as f:
+        f.write(msg + "\n")
 
 cap = cv2.VideoCapture(0)
 if cap.isOpened():
@@ -11,8 +16,8 @@ if cap.isOpened():
         os.makedirs(DATA_DIR, exist_ok=True)
         cv2.imwrite(os.path.join(DATA_DIR, 'Intruder.jpg'), frame)
     else:
-        print("Failed to capture frame")
+        log_error("Failed to capture frame")
 else:
-    print("Could not open webcam")
+    log_error("Could not open webcam")
 
 cap.release()
